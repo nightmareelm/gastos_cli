@@ -58,7 +58,7 @@ const EmployeeDataTable = () => {
                   <tr>
                     <td>{employee.tituloGasto}</td>
                     <td>${employee.cantidad}</td>
-                    <td>{employee.fecha}</td>
+                    <td style={{width : '1px', whiteSpace : 'nowrap'}}>{employee.fecha}</td>
                     <td>{employee.establecimiento}</td>
                     <td>{employee.comentario}</td>
                     <td >
