@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-import editIcon from "./../assets/edit.png";
 import deleteIcon from "./../assets/delete.JPG";
 import "../App.css";
 
@@ -23,71 +22,58 @@ const EmployeeDataTable = () => {
     setEmployeeData();
   }, []);
 
-  
-    const removeEmployee = (id) => {
-      axios.delete(baseURL + "api/tutorials/" + id).then((response) => {
-        setEmployeeData();
-        navigate('/read')
-  
-      }).catch(error => {
-        console.log("Error borrando gasto:" + error);
-      });
-    }
+
+  const removeEmployee = (id) => {
+    axios.delete(baseURL + "api/tutorials/" + id).then((response) => {
+      setEmployeeData();
+      navigate('/read')
+
+    }).catch(error => {
+      console.log("Error borrando gasto:" + error);
+    });
+  }
 
   return (
     <div className="card-body">
-      <br>
-      </br>
-      <nav>
-        <button
-          className="btn btn-primary nav-item active"
-          onClick={() => navigate("/create")}>
-          Crear registro de compra
-        </button>
-      </nav>
 
-      <br></br>
       <div className="col-md-12">
-        <h4>Lista de Compras</h4>
+        <h2 className="display-6 text-center mb-4">Lista de compras</h2>
 
-        <div className="container">
-          <div className="row">
-            <div className="col-12">
-              <table className="table table-bordered table-striped">
-                <thead>
+        <div className="table-responsive">
+          <table className="table table-bordered table-striped text-center">
+            <thead>
+              <tr>
+                <th>Gasto</th>
+                <th>Cantidad</th>
+                <th>Fecha</th>
+                <th>Establecimiento</th>
+                <th>Comentario</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {
+                employees &&
+                employees.map((employee, index) => (
                   <tr>
-                    <th>Gasto</th>
-                    <th>Cantidad</th>
-                    <th>Fecha</th>
-                    <th>Establecimiento</th>
-                    <th>Comentario</th>
-                    <th scope="col">Acciones</th>
+                    <td>{employee.tituloGasto}</td>
+                    <td>${employee.cantidad}</td>
+                    <td>{employee.fecha}</td>
+                    <td>{employee.establecimiento}</td>
+                    <td>{employee.comentario}</td>
+                    <td >
+                      <button
+                        onClick={() => removeEmployee(employee.id)} className="button"
+                      > <img src={deleteIcon} alt="Remove" title="Remove" width="30" height="30" />
+                      </button>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {
-                    employees &&
-                    employees.map((employee, index) => (
-                      <tr>
-                        <td>{employee.tituloGasto}</td>
-                        <td>${employee.cantidad}</td>
-                        <td>{employee.fecha}</td>
-                        <td>{employee.establecimiento}</td>
-                        <td>{employee.comentario}</td>
-                        <td >
-                          <button
-                            onClick={() => removeEmployee(employee.id)} className="button"
-                          > <img src={deleteIcon} alt="Remove" title="Remove" width="30" height="30" />
-                          </button>
-                        </td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </table>
-            </div>
-          </div>
+                ))
+              }
+            </tbody>
+          </table>
         </div>
+
       </div>
     </div>
   );

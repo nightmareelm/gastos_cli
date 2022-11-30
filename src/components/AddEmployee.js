@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { Form, Button, Container, Alert } from 'react-bootstrap';
 
 const EmployeeForm = () => {
   const baseURL = "https://gastos-api.onrender.com/api/tutorials";
@@ -43,14 +42,14 @@ const EmployeeForm = () => {
         comentario: comentario
       })
       .then((response) => {
-        alert("Gasto "+ tituloGasto +" agregado!");
+        alert("Gasto " + tituloGasto + " agregado!");
         navigate("/read");
       }).catch(error => {
-        alert("error==="+error);
+        alert("error===" + error);
       });
   };
 
-  const cancelHandler = () =>{
+  const cancelHandler = () => {
     //reset the values of input fields
     setTitulo('');
     setCantidad('');
@@ -60,45 +59,46 @@ const EmployeeForm = () => {
     navigate("/read");
 
   }
-    return(
-      <Alert variant='primary'>
-      <Container>
-      <Form onSubmit={submitActionHandler}>
+  return (
+    <div className="row h-100 justify-content-center align-items-center">
+      <div class="col-10 col-md-8 col-lg-6">
+        <form class="needs-validation" novalidate onSubmit={submitActionHandler}>
+          <div class="row g-3">
 
-        <Form.Group controlId="form.Name">
-            <Form.Label>Gasto</Form.Label>
-            <Form.Control type="text" value={tituloGasto} onChange={gastoChangeHandler} placeholder="Escribe el gasto" required/>
-        </Form.Group>
+            <div class="col-sm-6">
+              <label for="firstName" class="form-label">Gasto</label>
+              <input type="text" class="form-control" value={tituloGasto} onChange={gastoChangeHandler} required />
+            </div>
 
-        <Form.Group  controlId="form.Role">
-            <Form.Label>Costo</Form.Label>
-            <Form.Control type="text" value={cantidad} onChange={costoChangeHandler} placeholder="Escribe el costo" required/>
-        </Form.Group>
+            <div class="col-sm-6">
+              <label for="lastName" class="form-label">Costo</label>
+              <input type="text" class="form-control" value={cantidad} onChange={costoChangeHandler} required />
+            </div>
 
-        <Form.Group  controlId="form.Role">
-            <Form.Label>Fecha</Form.Label>
-            <Form.Control type="text" value={fecha} onChange={fechaChangeHandler} placeholder="Escribe la fecha" required/>
-        </Form.Group>
+            <div class="col-6">
+              <label for="email" class="form-label">Fecha</label>
+              <input type="text" class="form-control" value={fecha} onChange={fechaChangeHandler} placeholder="AAAA/MM/DD" required />
+            </div>
 
-        <Form.Group  controlId="form.Role">
-            <Form.Label>Lugar de Compra</Form.Label>
-            <Form.Control type="text" value={establecimiento} onChange={lugarChangeHandler} placeholder="Escribe el lugar" required/>
-        </Form.Group>
+            <div class="col-6">
+              <label for="address" class="form-label">Lugar de Compra</label>
+              <input type="text" class="form-control" value={establecimiento} onChange={lugarChangeHandler} />
+            </div>
 
-        <Form.Group  controlId="form.Role">
-            <Form.Label>Comentarios</Form.Label>
-            <Form.Control type="text" value={comentario} onChange={comentChangeHandler} placeholder="Escribe un comentario" required/>
-        </Form.Group>
+            <div class="col-12">
+              <label for="address2" class="form-label">Comentarios</label>
+              <input type="text" class="form-control" value={comentario} onChange={comentChangeHandler} />
+            </div>
 
-        <br></br>
-        <Button type='submit'>Agregar gasto</Button>
-        &nbsp;&nbsp;&nbsp;
-        <Button type='submit' onClick={()=>cancelHandler()}>Cancel</Button>
-      </Form>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <button type='submit' class="btn btn-primary btn-lg px-4">Agregar</button>
+              <button ttype='submit' onClick={() => cancelHandler()} class="btn btn-primary btn-lg px-4">Cancelar</button>
+            </div>
 
-    </Container>
-    </Alert>
-
-    );
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }
 export default EmployeeForm;
