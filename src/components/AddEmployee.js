@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { format } from 'date-fns'
+
 const EmployeeForm = () => {
   const baseURL = "https://gastos-api.onrender.com/api/tutorials";
   const navigate = useNavigate();
@@ -10,6 +14,7 @@ const EmployeeForm = () => {
   const [fecha, setFecha] = useState('');
   const [establecimiento, setEstab] = useState('');
   const [comentario, setComen] = useState('');
+  const [startDate, setStartDate] = useState(new Date());
 
   const gastoChangeHandler = (event) => {
     setTitulo(event.target.value);
@@ -19,9 +24,20 @@ const EmployeeForm = () => {
     setCantidad(event.target.value);
   };
 
-  const fechaChangeHandler = (event) => {
-    setFecha(event.target.value);
-  };
+  var today = startDate;
+  var dd = today.getDate();
+  var mm = today.getMonth() + 1;
+  var yyyy = today.getFullYear();
+
+  if (dd < 10) {
+    dd = '0' + dd
+  }
+
+  if (mm < 10) {
+    mm = '0' + mm
+  }
+
+  var convertedDate = dd + '-' + mm + '-' + yyyy;
 
   const lugarChangeHandler = (event) => {
     setEstab(event.target.value);
@@ -37,7 +53,7 @@ const EmployeeForm = () => {
       .post(baseURL, {
         tituloGasto: tituloGasto,
         cantidad: cantidad,
-        fecha: fecha,
+        fecha: convertedDate,
         establecimiento: establecimiento,
         comentario: comentario
       })
@@ -59,6 +75,7 @@ const EmployeeForm = () => {
     navigate("/read");
 
   }
+
   return (
     <div className="row h-100 justify-content-center align-items-center">
       <div class="col-10 col-md-8 col-lg-6">
@@ -77,7 +94,7 @@ const EmployeeForm = () => {
 
             <div class="col-6">
               <label for="email" class="form-label">Fecha</label>
-              <input type="text" class="form-control" value={fecha} onChange={fechaChangeHandler} placeholder="AAAA/MM/DD" required />
+              <DatePicker dateFormat="dd/MM/yyyy" selected={startDate} onChange={(date) => setStartDate(date)} />
             </div>
 
             <div class="col-6">
