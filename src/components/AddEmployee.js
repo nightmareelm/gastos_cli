@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { format } from 'date-fns'
 
 const EmployeeForm = () => {
-  const baseURL = "https://gastos-api.onrender.com/api/tutorials";
+  const baseURL = "https://gastos-rest.onrender.com/api/tutorials/";
   const navigate = useNavigate();
   const [tituloGasto, setTitulo] = useState('');
   const [cantidad, setCantidad] = useState('');

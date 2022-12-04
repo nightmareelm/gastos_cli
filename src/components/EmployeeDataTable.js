@@ -7,7 +7,7 @@ import "../App.css";
 const EmployeeDataTable = () => {
 
   const navigate = useNavigate();
-  const baseURL = "https://gastos-api.onrender.com/";
+  const baseURL = "https://gastos-rest.onrender.com/";
   const [employees, setEmployees] = useState([]);
 
   const setEmployeeData = () => {
