@@ -78,38 +78,38 @@ const EmployeeForm = () => {
 
   return (
     <div className="row h-100 justify-content-center align-items-center">
-      <div class="col-10 col-md-8 col-lg-6">
-        <form class="needs-validation" novalidate onSubmit={submitActionHandler}>
-          <div class="row g-3">
+      <div className="col-10 col-md-8 col-lg-6">
+        <form className="needs-validation" novalidate onSubmit={submitActionHandler}>
+          <div className="row g-3">
 
-            <div class="col-sm-6">
-              <label for="firstName" class="form-label">Gasto</label>
-              <input type="text" class="form-control" value={tituloGasto} onChange={gastoChangeHandler} required />
+            <div className="col-sm-6">
+              <label for="firstName" className="form-label">Gasto</label>
+              <input type="text" className="form-control" value={tituloGasto} onChange={gastoChangeHandler} required />
             </div>
 
-            <div class="col-sm-6">
+            <div className="col-sm-6">
               <label for="lastName" class="form-label">Costo</label>
-              <input type="text" class="form-control" value={cantidad} onChange={costoChangeHandler} required />
+              <input type="text" className="form-control" value={cantidad} onChange={costoChangeHandler} required />
             </div>
 
-            <div class="col-6">
-              <label for="email" class="form-label">Fecha</label>
+            <div className="col-6">
+              <label for="email" className="form-label">Fecha</label>
               <DatePicker dateFormat="dd/MM/yyyy" selected={startDate} onChange={(date) => setStartDate(date)} />
             </div>
 
-            <div class="col-6">
-              <label for="address" class="form-label">Lugar de Compra</label>
-              <input type="text" class="form-control" value={establecimiento} onChange={lugarChangeHandler} />
+            <div className="col-6">
+              <label for="address" className="form-label">Lugar de Compra</label>
+              <input type="text" className="form-control" value={establecimiento} onChange={lugarChangeHandler} />
             </div>
 
-            <div class="col-12">
-              <label for="address2" class="form-label">Comentarios</label>
-              <input type="text" class="form-control" value={comentario} onChange={comentChangeHandler} />
+            <div className="col-12">
+              <label for="address2" className="form-label">Comentarios</label>
+              <input type="text" className="form-control" value={comentario} onChange={comentChangeHandler} />
             </div>
 
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-              <button type='submit' class="btn btn-primary btn-lg px-4">Agregar</button>
-              <button ttype='submit' onClick={() => cancelHandler()} class="btn btn-primary btn-lg px-4">Cancelar</button>
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center">
+              <button type='submit' className="btn btn-primary btn-lg px-4">Agregar</button>
+              <button ttype='submit' onClick={() => cancelHandler()} className="btn btn-primary btn-lg px-4">Cancelar</button>
             </div>
 
           </div>

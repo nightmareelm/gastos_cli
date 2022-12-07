@@ -17,12 +17,12 @@ function App() {
           </a>
 
           <nav className="d-inline-flex mt-2 mt-md-0 ms-md-auto">
-            <ul class="nav nav-pills">
-              <li class="nav-item">
+            <ul className="nav nav-pills">
+              <li className="nav-item">
               <Link to="/" className="nav-link nav-item" aria-current="page"
                   >Inicio</Link>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <Link to="/create" className="nav-link nav-item" aria-current="page"
                   >Crear registro</Link>
               </li>

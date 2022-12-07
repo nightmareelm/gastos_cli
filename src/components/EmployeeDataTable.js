@@ -10,6 +10,15 @@ const EmployeeDataTable = () => {
   const baseURL = "https://gastos-rest.onrender.com/";
   const [employees, setEmployees] = useState([]);
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage, setPostsPerPage] = useState(8);
+
+  const [total, setTotal] = useState();
+
+  const lastPostIndex = currentPage * postsPerPage;
+  const firstPostIndex = lastPostIndex - postsPerPage;
+  const currentPosts = employees.slice(firstPostIndex, lastPostIndex);
+
   const setEmployeeData = () => {
     axios.get(baseURL + "api/tutorials").then((response) => {
       setEmployees(response.data);
@@ -22,7 +31,6 @@ const EmployeeDataTable = () => {
     setEmployeeData();
   }, []);
 
-
   const removeEmployee = (id) => {
     axios.delete(baseURL + "api/tutorials/" + id).then((response) => {
       setEmployeeData();
@@ -31,6 +39,12 @@ const EmployeeDataTable = () => {
     }).catch(error => {
       console.log("Error borrando gasto:" + error);
     });
+  }
+
+  let pages = [];
+
+  for (let i = 1; i <= Math.ceil(employees.length / postsPerPage); i++) {
+    pages.push(i);
   }
 
   return (
@@ -53,12 +67,11 @@ const EmployeeDataTable = () => {
             </thead>
             <tbody>
               {
-                employees &&
-                employees.map((employee, index) => (
-                  <tr>
+                currentPosts.map((employee, index) => (                  
+                  <tr key={index}>
                     <td>{employee.tituloGasto}</td>
                     <td>${employee.cantidad}</td>
-                    <td style={{width : '1px', whiteSpace : 'nowrap'}}>{employee.fecha}</td>
+                    <td style={{ width: '1px', whiteSpace: 'nowrap' }}>{employee.fecha}</td>
                     <td>{employee.establecimiento}</td>
                     <td>{employee.comentario}</td>
                     <td >
@@ -73,8 +86,20 @@ const EmployeeDataTable = () => {
             </tbody>
           </table>
         </div>
-
+        
       </div>
+      <div className='pagination'>
+          {pages.map((page, index) => {
+            return (
+              <button
+                key={index}
+                onClick={() => setCurrentPage(page)}
+                className={page == currentPage ? "active" : ""}>
+                {page}
+              </button>
+            );
+          })}
+        </div>
     </div>
   );
 }
