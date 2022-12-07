@@ -3,7 +3,7 @@ import {useParams, useNavigate} from "react-router-dom";
 import axios from "axios";
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 
-const EmployeeForm = () => {
+const GastoForm = () => {
 
   const editURL = "http://localhost:8080/employee/";
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ useEffect(() => {
     setRole(empData.role);
 
   }).catch(error => {
-    alert("Error Ocurred getting employee detail:"+ error);
+    alert("Error Ocurred getting gasto detail:"+ error);
   });
 }, []);
 
@@ -44,11 +44,11 @@ useEffect(() => {
         role: empRole
       })
       .then((response) => {
-        alert("Employee "+ empId +" updated!");
+        alert("Gasto "+ empId +" updated!");
         navigate('/read')
 
       }).catch(error => {
-        alert("Error Ocurred updating employee:"+ error);
+        alert("Error Ocurred updating gasto:"+ error);
       });
 
   };
@@ -70,7 +70,7 @@ useEffect(() => {
             <Form.Control type="text" value={empRole} onChange={roleChangeHandler} placeholder="Enter Role" required/>
         </Form.Group>
         <br></br>
-        <Button type='submit'>Update Employee</Button>
+        <Button type='submit'>Update Gasto</Button>
         &nbsp;&nbsp;&nbsp;
         <Button type='submit' onClick={()=>navigate("/read")}>Cancel</Button>
       </Form>
@@ -79,4 +79,4 @@ useEffect(() => {
 
     );
 }
-export default EmployeeForm;
+export default GastoForm;

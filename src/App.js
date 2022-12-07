@@ -1,9 +1,9 @@
 import React from 'react';
 import { Routes, Route, Navigate, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import AddEmployee from './components/AddEmployee';
-import EditEmployee from './components/EditEmployee';
-import EmployeeDataTable from './components/EmployeeDataTable';
+import AddGasto from './components/AddGasto';
+import EditGasto from './components/EditGasto';
+import GastoDataTable from './components/GastoDataTable';
 
 
 function App() {
@@ -34,9 +34,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Navigate to="/read" />} />
-        <Route exact path="/create" element={<AddEmployee />} />
-        <Route exact path="/read" element={<EmployeeDataTable />} />
-        <Route path="/edit/:id" element={<EditEmployee />} />
+        <Route exact path="/create" element={<AddGasto />} />
+        <Route exact path="/read" element={<GastoDataTable />} />
+        <Route path="/edit/:id" element={<EditGasto />} />
       </Routes>
 
     </div>

@@ -4,36 +4,34 @@ import axios from "axios";
 import deleteIcon from "./../assets/delete.JPG";
 import "../App.css";
 
-const EmployeeDataTable = () => {
+const GastoDataTable = () => {
 
   const navigate = useNavigate();
   const baseURL = "https://gastos-rest.onrender.com/";
-  const [employees, setEmployees] = useState([]);
+  const [gastos, setGastos] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage, setPostsPerPage] = useState(8);
 
-  const [total, setTotal] = useState();
-
   const lastPostIndex = currentPage * postsPerPage;
   const firstPostIndex = lastPostIndex - postsPerPage;
-  const currentPosts = employees.slice(firstPostIndex, lastPostIndex);
+  const currentPosts = gastos.slice(firstPostIndex, lastPostIndex);
 
-  const setEmployeeData = () => {
+  const setGastosData = () => {
     axios.get(baseURL + "api/tutorials").then((response) => {
-      setEmployees(response.data);
+      setGastos(response.data);
     }).catch(error => {
       console.log("Error Ocurred while loading data:" + error);
     });
   }
 
   useEffect(() => {
-    setEmployeeData();
+    setGastosData();
   }, []);
 
-  const removeEmployee = (id) => {
+  const removeGasto = (id) => {
     axios.delete(baseURL + "api/tutorials/" + id).then((response) => {
-      setEmployeeData();
+      setGastosData();
       navigate('/read')
 
     }).catch(error => {
@@ -43,7 +41,7 @@ const EmployeeDataTable = () => {
 
   let pages = [];
 
-  for (let i = 1; i <= Math.ceil(employees.length / postsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(gastos.length / postsPerPage); i++) {
     pages.push(i);
   }
 
@@ -67,16 +65,16 @@ const EmployeeDataTable = () => {
             </thead>
             <tbody>
               {
-                currentPosts.map((employee, index) => (                  
+                currentPosts.map((gasto, index) => (                  
                   <tr key={index}>
-                    <td>{employee.tituloGasto}</td>
-                    <td>${employee.cantidad}</td>
-                    <td style={{ width: '1px', whiteSpace: 'nowrap' }}>{employee.fecha}</td>
-                    <td>{employee.establecimiento}</td>
-                    <td>{employee.comentario}</td>
+                    <td>{gasto.tituloGasto}</td>
+                    <td>${gasto.cantidad}</td>
+                    <td style={{ width: '1px', whiteSpace: 'nowrap' }}>{gasto.fecha}</td>
+                    <td>{gasto.establecimiento}</td>
+                    <td>{gasto.comentario}</td>
                     <td >
                       <button
-                        onClick={() => removeEmployee(employee.id)} className="button"
+                        onClick={() => removeGasto(gasto.id)} className="button"
                       > <img src={deleteIcon} alt="Remove" title="Remove" width="30" height="30" />
                       </button>
                     </td>
@@ -103,4 +101,4 @@ const EmployeeDataTable = () => {
     </div>
   );
 }
-export default EmployeeDataTable;
+export default GastoDataTable;
